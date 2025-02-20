@@ -25,4 +25,4 @@ class Settings(BaseSettings):
 
     
     
-settings = Settings() #type :igore
+settings = Settings() #type :ignore

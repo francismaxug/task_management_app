@@ -3,7 +3,6 @@ import logging
 from app.core.config import settings
 
 
-from logging.config import dictConfig
 
 from logging.config import dictConfig
 from typing import Dict, Any
