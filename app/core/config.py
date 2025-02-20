@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from enum import Enum
 
 class ENVIRONMENT(str, Enum):
-    DEVELOPMENT="developmet"
+    DEVELOPMENT="development"
     PRODUCTION="production"
     TEST="testing"
     
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
         env_ignore_empty=True
     )
     
-    
+
     
     
 settings = Settings() #type :igore
