@@ -1,5 +1,6 @@
 from app.models.base import metadata
-from sqlalchemy import Table, UUID, ForeignKey, String, Column, text, DateTime
+from sqlalchemy import Table, UUID, ForeignKey, String, Column, text, DateTime, func
+from datetime import datetime
 
 
 user_table = Table(
@@ -9,5 +10,5 @@ user_table = Table(
     Column("name", String(length=20),  default=None),
     Column("email", String, nullable=False, unique=True),
     Column("password", String, nullable=False),
-    Column("created_at", DateTime(timezone=True))
+    Column("createdAt", DateTime, server_default=text('CURRENT_TIMESTAMP'))
 )

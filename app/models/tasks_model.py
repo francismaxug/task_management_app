@@ -1,4 +1,4 @@
-from sqlalchemy import Table, String, DateTime, UUID, ForeignKey, text, Column, Text, Enum
+from sqlalchemy import Table, String,  UUID, ForeignKey, text, Column, Text, Enum, DateTime
 
 from app.models.base import metadata
 
@@ -15,4 +15,5 @@ task_table = Table(
     Column("priority",Enum(PRIORITY), default=PRIORITY.LOW),
     Column("assignedTo", UUID(as_uuid=True), ForeignKey("users.id")),  # Foreign key to user
     Column("createdBy", UUID(as_uuid=True), ForeignKey("users.id")),  # Foreign key to user
+    Column("createdAt", DateTime, server_default=text('CURRENT_TIMESTAMP'))
 )

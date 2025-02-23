@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field, UUID4, WithJsonSchema
+from pydantic import BaseModel, Field, UUID4, WithJsonSchema, ConfigDict
+from pydantic.alias_generators import to_camel
 from typing_extensions import Annotated
 from datetime import datetime, timedelta
 from enum import Enum
@@ -31,6 +32,11 @@ class TaskBaseSchema(BaseModel):
     createdBy: UUID4 = Field(title="Created By", description="User who created the task")
     priority: Annotated[PRIORITY , Field(title="Priority", description="Priority of the task", default=PRIORITY.LOW), WithJsonSchema({'extra': 'data'})]
     
+    
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True
+    )
     
 class Task(TaskBaseSchema):
     id:UUID4

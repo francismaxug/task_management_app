@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.exception_handlers import http_exception_handler
+from fastapi.exception_handlers import http_exception_handler as fastapi_http_exception_handler
 from asgi_correlation_id import CorrelationIdMiddleware
 from app.core.db  import database
 from app.core.db import settings
@@ -39,4 +39,4 @@ app.include_router(router=user_router, prefix="/user")
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
     logger.error(f"HTTPException: {exc.status_code} - {exc.detail}")
-    return await http_exception_handler(request, exc)
+    return await fastapi_http_exception_handler(request, exc)

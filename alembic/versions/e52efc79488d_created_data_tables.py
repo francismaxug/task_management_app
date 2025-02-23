@@ -1,8 +1,8 @@
-"""Create tables
+"""created data tables
 
-Revision ID: 39e50bdc5360
+Revision ID: e52efc79488d
 Revises: 
-Create Date: 2025-02-20 23:41:27.206688
+Create Date: 2025-02-22 03:28:58.604297
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '39e50bdc5360'
+revision: str = 'e52efc79488d'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,7 +25,7 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=20), nullable=True),
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('password', sa.String(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('createdAt', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
@@ -37,6 +37,7 @@ def upgrade() -> None:
     sa.Column('priority', sa.Enum('LOW', 'HIGH', 'MEDIUM', name='priority'), nullable=True),
     sa.Column('assignedTo', sa.UUID(), nullable=True),
     sa.Column('createdBy', sa.UUID(), nullable=True),
+    sa.Column('createdAt', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=True),
     sa.ForeignKeyConstraint(['assignedTo'], ['users.id'], ),
     sa.ForeignKeyConstraint(['createdBy'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
